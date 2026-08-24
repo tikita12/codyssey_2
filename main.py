@@ -12,9 +12,21 @@ def load_prompts():
 
 # 프롬프트 추가
 def add_prompt():
-
-    title = input("제목: ")
-    content = input("내용: ")
+    # 제목 입력 (빈 값 검증)
+    while True:
+        title = input("제목: ").strip()
+        if title == "":
+            print("❌ 제목을 입력해주세요!")
+            continue
+        break
+    
+    # 내용 입력 (빈 값 검증)
+    while True:
+        content = input("내용: ").strip()
+        if content == "":
+            print("❌ 내용을 입력해주세요!")
+            continue
+        break
     
     print("\n카테고리를 선택하세요:")
     print("  1. 텍스트 생성")
@@ -41,17 +53,8 @@ def add_prompt():
         else:
             print("❌ 1~6 사이의 숫자를 입력하세요!")
     
-    while True:
-        fav_input = input("즐겨찾기에 추가할까요? (y/n): ").lower()
-        if fav_input == 'y':
-            favorite = True
-            break
-        elif fav_input == 'n':
-            favorite = False
-            break
-        else:
-            print("❌ y 또는 n만 입력하세요!")
-
+    # ✅ 즐겨찾기 부분 삭제됨!
+    
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     new_prompt = {
@@ -59,8 +62,7 @@ def add_prompt():
         "title": title,
         "content": content,
         "category": category,
-        "favorite": favorite,
-        "created_date": now,  
+        "created_date": now,  # ✅ favorite 삭제됨!
     }
     
     prompts.append(new_prompt)
@@ -84,7 +86,6 @@ def view_prompts():
         print(f"제목: {prompt['title']}")
         print(f"내용: {prompt['content']}")
         print(f"카테고리: {prompt['category']}")
-        print(f"즐겨찾기: {'⭐ 예' if prompt['favorite'] else '아니오'}")
         print(f"생성일: {prompt.get('created_date', '정보 없음')}")  # ✅ .get() 사용!
         print("="*50)
     
