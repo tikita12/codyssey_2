@@ -4,19 +4,25 @@
       "id": 1,
       "title": "md파일 만들기",
       "content": "첨부한 과제 문서를 분석해서, 제출용 마크다운 문서 README에 뭘 적어야 하는지 빈칸 채우기 목차로 만들어줘. 내용은 내가 직접 채울 거야. 칸마다 여기에 뭘 적으면 되는지 한 줄씩 쉬운 말로 힌트를 달아줘. 과제 문서에 있는 요구사항과 제약사항을 하나도 빠뜨리지 마.",
-      "created_date": "2026-08-24"
+      "created_date": "2026-08-24",
+      "category": "텍스트 생성",
+      "favorite": false
     },
     {
       "id": 2,
       "title": "피곤한 직장인",
       "content": "45-degree angle shot. Black and white office. An exhausted man sits at a desk looking up. He sighs deeply, then heavily drops his head, burying his face in his arms.",
-      "created_date": "2026-08-24"
+      "created_date": "2026-08-24",
+      "category": "영상 생성",
+      "favorite": false
     },
     {
       "id": 3,
       "title": "활기가 도는 직장인",
       "content": "[LOCKED CAMERA, STRAIGHT-ON FRONTAL ANGLE] Frontal medium shot. The exact man from the reference image sits directly facing the camera at his office desk. He stretches his arms wide and high, looking completely revitalized, energetic, and refreshed with a bright smile. Keep the exact office background (lamp, laptop, documents). Full color, Exactly as he raises his arms upwards, a massive, glowing green radial light burst explodes behind him. He holds his arms high up in the air, and the video ends with him staying in this energetic upward-stretched pose. Keep the office desk in front. Full color.",
-      "created_date": "2026-08-24"
+      "created_date": "2026-08-24",
+      "category": "영상 생성",
+      "favorite": false
     }
   ]
 }

@@ -11,28 +11,64 @@ def load_prompts():
         return []
 
 # 프롬프트 추가
-def add_prompt(title, content):
-    global prompt
+def add_prompt():
+
+    title = input("제목: ")
+    content = input("내용: ")
     
-    # 새 ID 만들기 (가장 큰 ID + 1)
-    new_id = max([p['id'] for p in prompts], default=0) + 1
+    print("\n카테고리를 선택하세요:")
+    print("  1. 텍스트 생성")
+    print("  2. 이미지 생성")
+    print("  3. 영상 생성")
+    print("  4. 페르소나")
+    print("  5. 자동화")
+    print("  6. 기타")
     
-    # 새 프롬프트 만들기
-    new_prompt = {
-        "id": new_id,
-        "title": title,
-        "content": content,
-        "created_date": datetime.now().strftime("%Y-%m-%d")
+    categories = {
+        '1': '텍스트 생성',
+        '2': '이미지 생성',
+        '3': '영상 생성',
+        '4': '페르소나',
+        '5': '자동화',
+        '6': '기타'
     }
     
-    # 추가
+    while True:
+        choice = input("선택 (1-6): ")
+        if choice in categories:
+            category = categories[choice]
+            break
+        else:
+            print("❌ 1~6 사이의 숫자를 입력하세요!")
+    
+    while True:
+        fav_input = input("즐겨찾기에 추가할까요? (y/n): ").lower()
+        if fav_input == 'y':
+            favorite = True
+            break
+        elif fav_input == 'n':
+            favorite = False
+            break
+        else:
+            print("❌ y 또는 n만 입력하세요!")
+
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    new_prompt = {
+        "id": len(prompts) + 1,
+        "title": title,
+        "content": content,
+        "category": category,
+        "favorite": favorite,
+        "created_date": now,  
+    }
+    
     prompts.append(new_prompt)
-    print(f"✅ 프롬프트 추가 완료! (ID: {new_id})")
+    print(f"✅ '{title}' 추가 완료!")
 
 # 프롬프트 조회
 def view_prompts():
     """모든 프롬프트 조회"""
-    global prompt
     
     if not prompts:
         print("📭 저장된 프롬프트가 없습니다.")
@@ -43,9 +79,14 @@ def view_prompts():
     print("="*50)
     
     for prompt in prompts:
-        print(f"\n[ID: {prompt['id']}] {prompt['title']}")
+        print("\n" + "="*50)
+        print(f"ID: {prompt['id']}")
+        print(f"제목: {prompt['title']}")
         print(f"내용: {prompt['content']}")
-        print(f"생성일: {prompt['created_date']}")
+        print(f"카테고리: {prompt['category']}")
+        print(f"즐겨찾기: {'⭐ 예' if prompt['favorite'] else '아니오'}")
+        print(f"생성일: {prompt.get('created_date', '정보 없음')}")  # ✅ .get() 사용!
+        print("="*50)
     
     print("\n" + "="*50)
 
@@ -165,9 +206,7 @@ def main():
         choice = show_menu()
         
         if choice == "1":
-            title = input("제목: ")
-            content = input("내용: ")
-            add_prompt(title, content)
+            add_prompt()
         
         elif choice == "2":
             view_prompts()
