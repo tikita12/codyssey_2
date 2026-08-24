@@ -76,6 +76,23 @@ def update_prompt(prompt_id, title, content):
     
     print(f"❌ ID {prompt_id}를 찾을 수 없습니다.")
 
+# 프롬프트 검색
+def search_prompt():
+    """프롬프트 검색"""
+    keyword = input("검색어 : ")
+    found =False
+
+    for prompt in prompts:
+        if keyword in prompt['title'] or keyword in prompt['content']:
+            print(f"ID: {prompt['id']}")
+            print(f"제목: {prompt['title']}")
+            print(f"내용: {prompt['content']}")
+            print("-" * 30)
+            found = True
+
+    if not found:
+        print("검색 결과가 없습니다.")
+
 # 프롬프트 관리 프로그램
 prompts  = load_prompts()
 
@@ -85,7 +102,8 @@ def show_menu():
     print("2. 프롬프트 조회")
     print("3. 프롬프트 삭제")
     print("4. 프롬프트 수정")
-    print("5. 종료")
+    print("5. 프롬프트 검색")
+    print("6. 종료")
     choice = input("선택: ")
     return choice
 
@@ -115,8 +133,11 @@ def main():
             title = input("새 제목: ")
             content = input("새 내용: ")
             update_prompt(prompt_id, title, content)
-        
+
         elif choice == "5":
+            search_prompt()
+        
+        elif choice == "6":
             print("종료합니다!")
             break
         
