@@ -71,7 +71,6 @@ def add_prompt():
 # 프롬프트 조회
 def view_prompts():
     """모든 프롬프트 조회"""
-    
     if not prompts:
         print("📭 저장된 프롬프트가 없습니다.")
         return
@@ -82,14 +81,30 @@ def view_prompts():
     
     for prompt in prompts:
         print("\n" + "="*50)
-        print(f"ID: {prompt['id']}")
-        print(f"제목: {prompt['title']}")
-        print(f"내용: {prompt['content']}")
-        print(f"카테고리: {prompt['category']}")
-        print(f"생성일: {prompt.get('created_date', '정보 없음')}")  # ✅ .get() 사용!
+        print(f"ID: {prompt.get('id', '없음')}")
+        print(f"제목: {prompt.get('title', '없음')}")
+        print(f"내용: {prompt.get('content', '없음')}")
+        print(f"카테고리: {prompt.get('category', '없음')}")
+        print(f"즐겨찾기: {'⭐ 예' if prompt.get('favorite', False) else '아니오'}")
+        print(f"생성일: {prompt.get('created_date', '정보 없음')}")
         print("="*50)
+        
+# 즐겨찾기 기능
+def toggle_favorite(prompt_id):
+    """즐겨찾기 켜기/끄기"""
+    for prompt in prompts:
+        if prompt['id'] == prompt_id:
+            # 현재 상태 반전
+            current = prompt.get('favorite', False)
+            prompt['favorite'] = not current
+            
+            if prompt['favorite']:
+                print(f"⭐ ID {prompt_id}를 즐겨찾기에 추가했습니다!")
+            else:
+                print(f"☆ ID {prompt_id}를 즐겨찾기에서 제거했습니다!")
+            return
     
-    print("\n" + "="*50)
+    print(f"❌ ID {prompt_id}를 찾을 수 없습니다.")
 
 # 프롬프트 삭제
 def delete_prompt(prompt_id):
@@ -193,7 +208,8 @@ def show_menu():
     print("3. 프롬프트 삭제")
     print("4. 프롬프트 수정")
     print("5. 프롬프트 검색")
-    print("6. 종료")
+    print("6. 즐겨찾기 등록")   
+    print("9. 종료")
     choice = input("선택: ")
     return choice
 
@@ -206,26 +222,22 @@ def main():
     while True:
         choice = show_menu()
         
-        if choice == "1":
+        if choice == '1':
             add_prompt()
-        
-        elif choice == "2":
+        elif choice == '2':
             view_prompts()
-        
-        elif choice == "3":
-            prompt_id = int(input("삭제할 프롬프트 ID: "))
-            delete_prompt(prompt_id)
-        
-        elif choice == "4":
-            prompt_id = int(input("수정할 프롬프트 ID: "))
-            title = input("새 제목: ")
-            content = input("새 내용: ")
-            update_prompt(prompt_id, title, content)
-
-        elif choice == "5":
+        elif choice == '3':
+            delete_prompt()
+        elif choice == '4':
+            update_prompt()
+        elif choice == '5':
             search_prompt()
-        
-        elif choice == "6":
+        elif choice == '6':
+            view_prompts()
+            prompt_id = int(input("즐겨찾기 토글할 ID: "))
+            toggle_favorite(prompt_id)
+
+        elif choice == "9":
             print("종료합니다!")
             break
         
