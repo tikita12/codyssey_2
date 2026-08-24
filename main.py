@@ -149,17 +149,47 @@ def delete_prompt(prompt_id):
     print(f"❌ ID {prompt_id}를 찾을 수 없습니다.")
 
 # 프롬프트 수정
-def update_prompt(prompt_id, title, content):
-    global prompts
+def update_prompt():   # ← 괄호 비우기!
+    """프롬프트 수정"""
     
+    if not prompts:
+        print("\n📭 저장된 프롬프트가 없습니다.")
+        return
+    
+    # 목록 보여주기
+    print("\n📋 프롬프트 목록")
+    for prompt in prompts:
+        print(f"ID: {prompt['id']} | {prompt['title']}")
+    
+    # 1. 수정할 ID 입력받기
+    num = input("\n수정할 ID: ")
+    if not num.isdigit():
+        print("❌ 숫자를 입력하세요!")
+        return
+    
+    prompt_id = int(num)
+    
+    # 2. ID로 찾기
     for prompt in prompts:
         if prompt['id'] == prompt_id:
-            prompt['title'] = title
-            prompt['content'] = content
-            print(f"✅ ID {prompt_id} 프롬프트가 수정되었습니다.")
+            
+            # 3. 새 값 입력받기
+            print(f"\n현재 제목: {prompt['title']}")
+            new_title = input("새 제목 (Enter=유지): ")
+            
+            print(f"현재 내용: {prompt['content']}")
+            new_content = input("새 내용 (Enter=유지): ")
+            
+            # 4. 값 수정 (Enter만 누르면 기존 값 유지!)
+            if new_title:
+                prompt['title'] = new_title
+            if new_content:
+                prompt['content'] = new_content
+            
+            print("✅ 수정 완료!")
             return
     
-    print(f"❌ ID {prompt_id}를 찾을 수 없습니다.")
+    print(f"❌ ID {prompt_id}번을 찾을 수 없습니다!")
 
 # 프롬프트 검색
 def search_prompt():
