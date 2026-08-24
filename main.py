@@ -78,20 +78,68 @@ def update_prompt(prompt_id, title, content):
 
 # 프롬프트 검색
 def search_prompt():
-    """프롬프트 검색"""
-    keyword = input("검색어 : ")
-    found =False
-
-    for prompt in prompts:
-        if keyword in prompt['title'] or keyword in prompt['content']:
-            print(f"ID: {prompt['id']}")
-            print(f"제목: {prompt['title']}")
-            print(f"내용: {prompt['content']}")
-            print("-" * 30)
-            found = True
-
-    if not found:
-        print("검색 결과가 없습니다.")
+    while True:  # 반복해서 검색 가능
+        keyword = input("\n검색할 키워드 (종료: q): ")
+        
+        # 종료 조건
+        if keyword.lower() == 'q':
+            print("검색을 종료합니다.")
+            break
+        
+        # 빈 입력 처리
+        if keyword.strip() == "":
+            print("⚠️ 검색어를 입력해주세요!")
+            continue
+        
+        # 검색 실행
+        results = []
+        for prompt in prompts:
+            if keyword in prompt['title'] or keyword in prompt['content']:
+                results.append(prompt)
+        
+ # 결과 없음
+        if len(results) == 0:
+            print(f"❌ '{keyword}'에 대한 검색 결과가 없습니다.")
+            print("다시 검색해주세요!")
+            continue
+        
+        # 결과 목록 출력
+        print(f"\n✅ 검색 결과: {len(results)}개")
+        print("-" * 40)
+        for idx, prompt in enumerate(results, 1):
+            print(f"  {idx}. [{prompt['id']}] {prompt['title']}")
+        print("-" * 40)
+        
+        # 상세보기 선택
+        while True:
+            choice = input("\n상세보기할 번호 선택 (취소: 0): ")
+            
+            # 취소
+            if choice == '0':
+                break
+            
+            # 숫자 검증
+            if not choice.isdigit():
+                print("⚠️ 숫자를 입력해주세요!")
+                continue
+            
+            choice = int(choice)
+            
+            # 범위 검증
+            if choice < 1 or choice > len(results):
+                print(f"⚠️ 1~{len(results)} 사이 번호를 입력해주세요!")
+                continue
+            
+            # 상세 정보 출력
+            selected = results[choice - 1]
+            print("\n" + "=" * 40)
+            print(f"📌 제목: {selected['title']}")
+            print(f"🆔 ID: {selected['id']}")
+            print("-" * 40)
+            print(f"📄 내용:\n{selected['content']}")
+            print("=" * 40)
+        
+        break  # 검색 종료
 
 # 프롬프트 관리 프로그램
 prompts  = load_prompts()
