@@ -230,18 +230,59 @@ def search_prompt():
         
         break  # 검색 종료
 
+#카테고리 보기
+def view_by_category():
+    """카테고리별 조회"""
+    if not prompts:
+        print("📭 저장된 프롬프트가 없습니다.")
+        return
+    
+    # 1. 존재하는 카테고리 목록 만들기 (중복 제거)
+    categories = set()
+    for prompt in prompts:
+        categories.add(prompt['category'])
+    
+    categories = sorted(categories)  # 정렬
+    
+    # 2. 카테고리 목록 보여주기
+    print("\n📂 카테고리 목록")
+    print("="*40)
+    for i, category in enumerate(categories, 1):
+        print(f"{i}. {category}")
+    
+    # 3. 사용자 선택
+    choice = input("\n조회할 카테고리 번호: ")
+    
+    # 4. 입력 검증
+    if not choice.isdigit() or int(choice) < 1 or int(choice) > len(categories):
+        print("❌ 잘못된 번호입니다.")
+        return
+    
+    # 5. 선택한 카테고리
+    selected = categories[int(choice) - 1]
+    
+    # 6. 해당 카테고리 프롬프트 출력
+    print(f"\n📋 '{selected}' 카테고리 프롬프트")
+    print("="*40)
+    
+    for prompt in prompts:
+        if prompt['category'] == selected:
+            star = " (⭐)" if prompt.get('favorite', False) else ""
+            print(f"ID: {prompt['id']}, 제목: {prompt['title']}{star}")
+
 # 프롬프트 관리 프로그램
 prompts  = load_prompts()
 
 def show_menu():
     print("\n=== 프롬프트 관리자 ===")
     print("1. 프롬프트 추가")
-    print("2. 프롬프트 조회")
+    print("2. 프롬프트 목록")
     print("3. 프롬프트 삭제")
     print("4. 프롬프트 수정")
     print("5. 프롬프트 검색")
     print("6. 즐겨찾기 등록/해제")  
     print("7. ⭐ 즐겨찾기만 보기") 
+    print("8. 카테고리별 조회")
     print("9. 종료")
     choice = input("선택: ")
     return choice
@@ -271,6 +312,8 @@ def main():
             toggle_favorite(prompt_id)
         elif choice == '7':
             view_favorites()
+        elif choice == '8':
+            view_by_category()
         elif choice == "9":
             print("종료합니다!")
             break
