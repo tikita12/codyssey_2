@@ -80,28 +80,40 @@ def view_prompts():
     print("="*50)
     
     for prompt in prompts:
+                # 즐겨찾기 별표 만들기
+        star = " (⭐)" if prompt.get('favorite', False) else ""
         print("\n" + "="*50)
         print(f"ID: {prompt.get('id', '없음')}")
-        print(f"제목: {prompt.get('title', '없음')}")
+        print(f"ID: {prompt['id']}, 제목: {prompt['title']}{star}")
         print(f"내용: {prompt.get('content', '없음')}")
         print(f"카테고리: {prompt.get('category', '없음')}")
-        print(f"즐겨찾기: {'⭐ 예' if prompt.get('favorite', False) else '아니오'}")
+
         print(f"생성일: {prompt.get('created_date', '정보 없음')}")
         print("="*50)
         
 # 즐겨찾기 기능
 def toggle_favorite(prompt_id):
-    """즐겨찾기 켜기/끄기"""
+    """즐겨찾기 등록/해제 선택"""
     for prompt in prompts:
         if prompt['id'] == prompt_id:
-            # 현재 상태 반전
+            # 현재 상태 보여주기
             current = prompt.get('favorite', False)
-            prompt['favorite'] = not current
+            status = "⭐ 등록됨" if current else "☆ 해제됨"
+            print(f"\n현재 상태: {status}")
             
-            if prompt['favorite']:
+            # 사용자 선택
+            print("1. 즐겨찾기 등록")
+            print("2. 즐겨찾기 해제")
+            choice = input("선택: ")
+            
+            if choice == '1':
+                prompt['favorite'] = True
                 print(f"⭐ ID {prompt_id}를 즐겨찾기에 추가했습니다!")
-            else:
+            elif choice == '2':
+                prompt['favorite'] = False
                 print(f"☆ ID {prompt_id}를 즐겨찾기에서 제거했습니다!")
+            else:
+                print("❌ 잘못된 선택입니다.")
             return
     
     print(f"❌ ID {prompt_id}를 찾을 수 없습니다.")
@@ -228,7 +240,7 @@ def show_menu():
     print("3. 프롬프트 삭제")
     print("4. 프롬프트 수정")
     print("5. 프롬프트 검색")
-    print("6. 즐겨찾기 등록")  
+    print("6. 즐겨찾기 등록/해제")  
     print("7. ⭐ 즐겨찾기만 보기") 
     print("9. 종료")
     choice = input("선택: ")
