@@ -106,6 +106,26 @@ def toggle_favorite(prompt_id):
     
     print(f"❌ ID {prompt_id}를 찾을 수 없습니다.")
 
+# 즐겨찾기 모아보기
+def view_favorites():
+    """즐겨찾기만 조회"""
+    # 즐겨찾기된 것만 필터링
+    favorites = [p for p in prompts if p.get('favorite', False)]
+    
+    if not favorites:
+        print("⭐ 즐겨찾기한 프롬프트가 없습니다.")
+        return
+    
+    print("\n" + "="*50)
+    print("⭐ 즐겨찾기 목록")
+    print("="*50)
+    
+    for prompt in favorites:
+        print(f"\n[{prompt['id']}] {prompt['title']}")
+        print(f"  카테고리: {prompt.get('category', '없음')}")
+    
+    print("\n" + "="*50)
+
 # 프롬프트 삭제
 def delete_prompt(prompt_id):
     """프롬프트 삭제"""
@@ -208,7 +228,8 @@ def show_menu():
     print("3. 프롬프트 삭제")
     print("4. 프롬프트 수정")
     print("5. 프롬프트 검색")
-    print("6. 즐겨찾기 등록")   
+    print("6. 즐겨찾기 등록")  
+    print("7. ⭐ 즐겨찾기만 보기") 
     print("9. 종료")
     choice = input("선택: ")
     return choice
@@ -236,7 +257,8 @@ def main():
             view_prompts()
             prompt_id = int(input("즐겨찾기 토글할 ID: "))
             toggle_favorite(prompt_id)
-
+        elif choice == '7':
+            view_favorites()
         elif choice == "9":
             print("종료합니다!")
             break
