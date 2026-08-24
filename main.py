@@ -63,6 +63,7 @@ def add_prompt():
         "content": content,
         "category": category,
         "created_date": now,  # ✅ favorite 삭제됨!
+        "views": 0
     }
     
     prompts.append(new_prompt)
@@ -181,6 +182,29 @@ def search_prompt():
             if keyword in prompt['title'] or keyword in prompt['content']:
                 results.append(prompt)
         
+        # 상세보기 선택
+        while True:
+            choice = input("\n상세보기할 번호 선택 (취소: 0): ")
+            
+            if choice == '0':  # 취소
+                break
+            
+            if choice.isdigit() and 1 <= int(choice) <= len(results):
+                prompt = results[int(choice) - 1]
+                
+                prompt['views'] += 1  # ← 조회수 증가! 📈 (핵심!)
+                
+                # 상세 정보 출력
+                print("\n" + "="*40)
+                print(f"제목: {prompt['title']}")
+                print(f"카테고리: {prompt['category']}")
+                print(f"내용: {prompt['content']}")
+                print(f"작성일: {prompt['created_date']}")
+                print(f"👁️ 조회수: {prompt['views']}")  # 조회수 표시!
+                print("="*40)
+            else:
+                print("❌ 올바른 번호를 입력하세요!")
+        
  # 결과 없음
         if len(results) == 0:
             print(f"❌ '{keyword}'에 대한 검색 결과가 없습니다.")
@@ -267,43 +291,81 @@ def view_by_category():
 
 # 프롬프트 상세내용 보기
 def view_prompt_detail():
-    """프롬프트 상세보기 (전체 내용 표시)"""
-    # 프롬프트가 없으면 안내
+    """목록 보여주고 → 번호 선택 → 상세 정보 출력"""
+    
+    # 프롬프트 없으면 종료
     if not prompts:
         print("\n📭 저장된 프롬프트가 없습니다.")
         return
     
-    # 목록 먼저 보여주기!
-    view_prompts()  # 이미 만든 함수 재활용! 😎
+    # 1단계: 목록 먼저 보여주기
+    print("\n📋 프롬프트 목록")
+    print("="*40)
+    for prompt in prompts:
+        star = "⭐" if prompt.get('favorite', False) else "☆"
+        print(f"ID: {prompt['id']} | {prompt['title']} | {prompt['category']} | {star}")
+    print("="*40)
     
-    # 번호 입력받기
-    prompt_id = input("\n상세히 볼 프롬프트 ID: ")
+    # 2단계: 번호 입력받기
+    num = input("\n상세히 볼 ID: ")
     
-    # 입력 검증 (숫자인지 확인)
-    if not prompt_id.isdigit():
-        print("❌ 숫자를 입력해주세요.")
+    # 숫자인지 확인 (잘못된 입력 처리)
+    if not num.isdigit():
+        print("❌ 숫자를 입력해주세요!")
         return
     
-    prompt_id = int(prompt_id)
+    prompt_id = int(num)
     
-    # 해당 ID 찾기
+    # 3단계: ID로 프롬프트 찾기
     for prompt in prompts:
         if prompt['id'] == prompt_id:
-            # 즐겨찾기 표시
-            star = "⭐ 즐겨찾기" if prompt.get('favorite', False) else "☆ 일반"
             
-            # 전체 내용 출력
+            prompt['views'] += 1  # 📈 조회수 증가! (핵심!)
+            
+            # 즐겨찾기 표시
+            star = "⭐ 등록됨" if prompt.get('favorite', False) else "☆ 해제됨"
+            
+            # 4단계: 상세 정보 출력
             print("\n" + "="*40)
             print(f"📌 제목: {prompt['title']}")
-            print(f"📂 카테고리: {prompt['category']}")
+            print(f"📁 카테고리: {prompt['category']}")
             print(f"⭐ 즐겨찾기: {star}")
+            print(f"👁️ 조회수: {prompt['views']}")
             print("-"*40)
             print(f"📝 내용:\n{prompt['content']}")
             print("="*40)
             return  # 찾았으니 함수 종료
     
-    # 반복문이 끝났는데 못 찾은 경우
-    print(f"❌ ID {prompt_id}번 프롬프트를 찾을 수 없습니다.")
+    # 못 찾았을 때 (잘못된 번호)
+    print(f"❌ ID {prompt_id}번 프롬프트를 찾을 수 없습니다!")
+
+#조회수 순위
+def view_top_prompts():
+    """조회수 Top 순위 보기"""
+    if not prompts:
+        print("\n📭 프롬프트가 없습니다.")
+        return
+    
+    # 조회수 높은 순으로 정렬! ⭐
+    sorted_prompts = sorted(prompts, key=lambda x: x['views'], reverse=True)
+    
+    print("\n" + "="*40)
+    print("🏆 인기 프롬프트 TOP")
+    print("="*40)
+    
+    for i, prompt in enumerate(sorted_prompts, 1):
+        # 순위별 메달 이모지 🥇🥈🥉
+        if i == 1:
+            medal = "🥇"
+        elif i == 2:
+            medal = "🥈"
+        elif i == 3:
+            medal = "🥉"
+        else:
+            medal = f"{i}위"
+        
+        print(f"{medal} {prompt['title']} (👁️ {prompt['views']}회)")
+    print("="*40)
 
 # 프롬프트 관리 프로그램
 prompts  = load_prompts()
@@ -319,6 +381,7 @@ def show_menu():
     print("7. ⭐ 즐겨찾기만 보기") 
     print("8. 카테고리별 조회")
     print("9. 상세내용 조회")
+    print("10. 인기 순위")
     print("0. 종료")
     choice = input("선택: ")
     return choice
@@ -352,6 +415,8 @@ def main():
             view_by_category()
         elif choice == '9':
             view_prompt_detail()
+        elif choice == '10':
+            view_top_prompts()
         elif choice == "0":
             print("종료합니다!")
             break
