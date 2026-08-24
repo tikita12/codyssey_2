@@ -70,26 +70,21 @@ def add_prompt():
 
 # 프롬프트 조회
 def view_prompts():
-    """모든 프롬프트 조회"""
+    """프롬프트 전체 조회 (제목, 카테고리, 즐겨찾기만)"""
+    # 프롬프트가 없으면 안내 메시지
     if not prompts:
-        print("📭 저장된 프롬프트가 없습니다.")
+        print("\n📭 저장된 프롬프트가 없습니다.")
         return
     
-    print("\n" + "="*50)
-    print("📋 프롬프트 목록")
-    print("="*50)
+    print("\n📋 프롬프트 목록")
+    print("="*40)
     
     for prompt in prompts:
-                # 즐겨찾기 별표 만들기
-        star = " (⭐)" if prompt.get('favorite', False) else ""
-        print("\n" + "="*50)
-        print(f"ID: {prompt.get('id', '없음')}")
-        print(f"ID: {prompt['id']}, 제목: {prompt['title']}{star}")
-        print(f"내용: {prompt.get('content', '없음')}")
-        print(f"카테고리: {prompt.get('category', '없음')}")
-
-        print(f"생성일: {prompt.get('created_date', '정보 없음')}")
-        print("="*50)
+        # 즐겨찾기 표시 (⭐ 또는 ☆)
+        star = "⭐" if prompt.get('favorite', False) else "☆"
+        
+        # 제목 | 카테고리 | 즐겨찾기만 표시
+        print(f"ID: {prompt['id']} | {prompt['title']} | {prompt['category']} | {star}")
         
 # 즐겨찾기 기능
 def toggle_favorite(prompt_id):
@@ -270,6 +265,46 @@ def view_by_category():
             star = " (⭐)" if prompt.get('favorite', False) else ""
             print(f"ID: {prompt['id']}, 제목: {prompt['title']}{star}")
 
+# 프롬프트 상세내용 보기
+def view_prompt_detail():
+    """프롬프트 상세보기 (전체 내용 표시)"""
+    # 프롬프트가 없으면 안내
+    if not prompts:
+        print("\n📭 저장된 프롬프트가 없습니다.")
+        return
+    
+    # 목록 먼저 보여주기!
+    view_prompts()  # 이미 만든 함수 재활용! 😎
+    
+    # 번호 입력받기
+    prompt_id = input("\n상세히 볼 프롬프트 ID: ")
+    
+    # 입력 검증 (숫자인지 확인)
+    if not prompt_id.isdigit():
+        print("❌ 숫자를 입력해주세요.")
+        return
+    
+    prompt_id = int(prompt_id)
+    
+    # 해당 ID 찾기
+    for prompt in prompts:
+        if prompt['id'] == prompt_id:
+            # 즐겨찾기 표시
+            star = "⭐ 즐겨찾기" if prompt.get('favorite', False) else "☆ 일반"
+            
+            # 전체 내용 출력
+            print("\n" + "="*40)
+            print(f"📌 제목: {prompt['title']}")
+            print(f"📂 카테고리: {prompt['category']}")
+            print(f"⭐ 즐겨찾기: {star}")
+            print("-"*40)
+            print(f"📝 내용:\n{prompt['content']}")
+            print("="*40)
+            return  # 찾았으니 함수 종료
+    
+    # 반복문이 끝났는데 못 찾은 경우
+    print(f"❌ ID {prompt_id}번 프롬프트를 찾을 수 없습니다.")
+
 # 프롬프트 관리 프로그램
 prompts  = load_prompts()
 
@@ -283,7 +318,8 @@ def show_menu():
     print("6. 즐겨찾기 등록/해제")  
     print("7. ⭐ 즐겨찾기만 보기") 
     print("8. 카테고리별 조회")
-    print("9. 종료")
+    print("9. 상세내용 조회")
+    print("0. 종료")
     choice = input("선택: ")
     return choice
 
@@ -314,7 +350,9 @@ def main():
             view_favorites()
         elif choice == '8':
             view_by_category()
-        elif choice == "9":
+        elif choice == '9':
+            view_prompt_detail()
+        elif choice == "0":
             print("종료합니다!")
             break
         
