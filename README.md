@@ -4,6 +4,22 @@
 ## 📌 프로그램 소개
 > 여태까지 썼던 프롬프트를 한군데 모아 관리하기 쉽게 만드는 프로그램입니다.
 
+## Git이란
+> 코드를 작성할 때 버전관리를 도와주는 도구
+> GitHub는 인터넷 저장소, Git은 내 컴퓨터에 설치하는 도구
+
+> Git설치 및 초기 설정
+> - 1. Git 설치
+>   2. 내 정보 등록
+>      # 이름 설정 (영문 추천)
+git config --global user.name "내 이름"
+
+# 이메일 설정 (GitHub 가입 이메일 추천)
+git config --global user.email "깃허브아이@이메일.com"
+
+# 설정 확인
+git config --list
+
 ## 🛠 개발 환경
 - **Python 버전**: > 3.14.7
 - **에디터**: > VSCode 사용, 설치한 확장(Python Extension, Korean Language Pack)
