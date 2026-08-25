@@ -220,6 +220,35 @@
 > -두 번째 생성: "Python 학습 (2)" (자동 번호 부여)
 > -세 번째 생성: "Python 학습 (3)"
 
+## 🚀 설치 방법
+
+### 1. 저장소 클론
+
+```bash
+git clone https://github.com/tikita12/codyssey_2.git
+```
+
+**실행 결과:**
+
+![git clone 실행 결과](./images/git_clone_result.png)
+
+### 2. 프로젝트 폴더 확인
+
+```bash
+cd codyssey_2
+ls
+```
+
+**폴더 구조:**
+
+![프로젝트 폴더](./images/project_folder.png)
+
+### 3. 실행
+
+```bash
+python main.py
+```
+
 ## ⭐ 보너스 기능 (선택 / 구현했다면)
 ### 1.수정/삭제(CRUD)
 #### **CRUD란?**
