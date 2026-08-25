@@ -54,12 +54,11 @@
 ## 🛠 개발 환경
 - **Python 버전**: > 3.14.7
 - **Python 설치확인**: >
-  ![설치확인](./image/hello.png)]
+  ![설치확인](./image/hello.png)
 - **에디터**: > VSCode 사용, 설치한 확장(Python Extension, Korean Language Pack)
 - **Git 버전**: > 2.55.0.windows.5
 - **Git 설정값**>
-  ![설치확인](./image/gitsetting.png)]
-  ![설정값](./image/gitsetting.png)]
+  ![설정값](./image/gitsetting.png)
 - **운영체제**: > Windows
 
 - 🛠️ 개발 환경 설치 확인 명령어
