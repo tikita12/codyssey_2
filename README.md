@@ -162,11 +162,11 @@
      
 ### 2.조회수·정렬 기능
    * **조회수 기능**
-    * 키워드 필터링: if keyword in prompt['title'] or keyword in prompt['content']를 통해 제목, 내용까지 훑어서 검색 결과 생성
-    * 조회수 증가 (views += 1): 사용자가 특정 번호를 선택해 상세 내용을 확인하는 순간, 해당 딕셔너리의 views 값을 1 증가 
+     * 키워드 필터링: if keyword in prompt['title'] or keyword in prompt['content']를 통해 제목, 내용까지 훑어서 검색 결과 생성
+     * 조회수 증가 (views += 1): 사용자가 특정 번호를 선택해 상세 내용을 확인하는 순간, 해당 딕셔너리의 views 값을 1 증가 
    * **조회수 많은 순으로 정렬**
-    * 데이터 정렬: key=lambda x: x['views']를 사용하여 딕셔너리의 views 값을 기준으로 정렬
-    * 순위 매기기 (enumerate): enumerate(sorted_prompts, 1)을 사용해 별도의 변수 없이도 1번부터 순차적으로 번호를 매김
+     * 데이터 정렬: key=lambda x: x['views']를 사용하여 딕셔너리의 views 값을 기준으로 정렬
+     * 순위 매기기 (enumerate): enumerate(sorted_prompts, 1)을 사용해 별도의 변수 없이도 1번부터 순차적으로 번호를 매김
 
 ## 📸 실행 결과 스크린샷
 > 여기에: 아래 스크린샷들을 이미지로 첨부하세요
