@@ -8,17 +8,23 @@
 > 코드를 작성할 때 버전관리를 도와주는 도구
 > GitHub는 인터넷 저장소, Git은 내 컴퓨터에 설치하는 도구
 
-> Git설치 및 초기 설정
-> - 1. Git 설치
->   2. 내 정보 등록
->      # 이름 설정 (영문 추천)
-git config --global user.name "내 이름"
+### Git설치 및 초기 설정 
+   1. Git 설치
+   2. 내 정보 등록
 
-# 이메일 설정 (GitHub 가입 이메일 추천)
-git config --global user.email "깃허브아이@이메일.com"
+🛠️ Git 초기 설정 명령어 : VSCode의 터미널열고 명령어 입력
 
-# 설정 확인
-git config --list
+| 명령어 | 설명 | 비고 |
+| :--- | :--- | :--- |
+| `git config --global user.name "Your Name"` | 사용자 이름 설정 | 영문 권장 |
+| `git config --global user.email "your-email@example.com"` | 사용자 이메일 설정 | GitHub 이메일 권장 |
+| `git config --list` | 설정 확인 | - |
+
+   3. 프로젝트에 Git 적용하기
+       -Git 시작하기 : git init
+       -변
+
+
 
 ## 🛠 개발 환경
 - **Python 버전**: > 3.14.7
