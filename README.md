@@ -9,7 +9,9 @@
 - **에디터**: > VSCode 사용, 설치한 확장(Python Extension, Korean Language Pack)
 - **Git 버전**: > 2.55.0.windows.5
 - **운영체제**: > Windows
+
 - 🛠️ 개발 환경 설치 확인 명령어
+
 | 프로그램 | 명령어 | 확인 방법 및 비고 |
 | :--- | :--- | :--- |
 | **Python** | `python --version` | 버전 번호가 뜨면 성공 (안 되면 `python3 --version`) |
