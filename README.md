@@ -10,9 +10,10 @@
 - **Git 버전**: > 2.55.0.windows.5
 - **운영체제**: > Windows
 - 🛠️ 개발 환경 설치 확인 명령어
-프로그램	확인 명령어	정상 출력 예시	비고
-Python	python --version	Python 3.10.x	안 될 경우 python3 --version 시도
-Git	git --version	git version 2.x.x	설치 후 터미널 재시작 필요
+| 프로그램 | 명령어 | 확인 방법 및 비고 |
+| :--- | :--- | :--- |
+| **Python** | `python --version` | 버전 번호가 뜨면 성공 (안 되면 `python3 --version`) |
+| **Git** | `git --version` | `git version 2.x.x`와 같이 뜨면 성공 |
 
 ## VSCode에서 Python파일 생성방법
  - 1. 프로젝트 폴더 생성
