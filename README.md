@@ -172,11 +172,11 @@
 ## 📸 실행 결과 스크린샷
 > 여기에: 아래 스크린샷들을 이미지로 첨부하세요
 - 개발 환경 설정 화면 (VSCode, Python 버전, Git 설정)![개발환경](./image/version.png)
-- 메뉴 화면
-- 프롬프트 추가 화면
-- 프롬프트 목록 화면
-- 검색 결과 화면
-- `git log --oneline --graph` 결과 화면
+- 메뉴 화면![메뉴화면](./image/menu.png)
+- 프롬프트 추가 화면![추가](./image/add.png)
+- 프롬프트 목록 화면![목록](./image/list.png)
+- 검색 결과 화면![검색](./image/search.png)
+- `git log --oneline --graph` 결과 화면![로그](./image/gitlog.png)
 
 ## 🔗 제출 정보
 - **GitHub 저장소 URL**: https://github.com/tikita12/codyssey_2
