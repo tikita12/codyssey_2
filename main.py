@@ -193,15 +193,13 @@ def update_prompt():   # ← 괄호 비우기!
 
 # 프롬프트 검색
 def search_prompt():
-    while True:  # 반복해서 검색 가능
+    while True:
         keyword = input("\n검색할 키워드 (종료: q): ")
         
-        # 종료 조건
         if keyword.lower() == 'q':
             print("검색을 종료합니다.")
             break
         
-        # 빈 입력 처리
         if keyword.strip() == "":
             print("⚠️ 검색어를 입력해주세요!")
             continue
@@ -212,33 +210,9 @@ def search_prompt():
             if keyword in prompt['title'] or keyword in prompt['content']:
                 results.append(prompt)
         
-        # 상세보기 선택
-        while True:
-            choice = input("\n상세보기할 번호 선택 (취소: 0): ")
-            
-            if choice == '0':  # 취소
-                break
-            
-            if choice.isdigit() and 1 <= int(choice) <= len(results):
-                prompt = results[int(choice) - 1]
-                
-                prompt['views'] += 1  # ← 조회수 증가! 📈 (핵심!)
-                
-                # 상세 정보 출력
-                print("\n" + "="*40)
-                print(f"제목: {prompt['title']}")
-                print(f"카테고리: {prompt['category']}")
-                print(f"내용: {prompt['content']}")
-                print(f"작성일: {prompt['created_date']}")
-                print(f"👁️ 조회수: {prompt['views']}")  # 조회수 표시!
-                print("="*40)
-            else:
-                print("❌ 올바른 번호를 입력하세요!")
-        
- # 결과 없음
+        # 결과 없음
         if len(results) == 0:
-            print(f"❌ '{keyword}'에 대한 검색 결과가 없습니다.")
-            print("다시 검색해주세요!")
+            print(f"❌ '{keyword}' 검색 결과가 없습니다.")
             continue
         
         # 결과 목록 출력
@@ -252,32 +226,32 @@ def search_prompt():
         while True:
             choice = input("\n상세보기할 번호 선택 (취소: 0): ")
             
-            # 취소
             if choice == '0':
                 break
             
-            # 숫자 검증
             if not choice.isdigit():
                 print("⚠️ 숫자를 입력해주세요!")
                 continue
             
             choice = int(choice)
             
-            # 범위 검증
             if choice < 1 or choice > len(results):
-                print(f"⚠️ 1~{len(results)} 사이 번호를 입력해주세요!")
+                print(f"⚠️ 1~{len(results)} 사이 번호를 입력하세요!")
                 continue
             
             # 상세 정보 출력
             selected = results[choice - 1]
+            selected['views'] += 1
+            
             print("\n" + "=" * 40)
             print(f"📌 제목: {selected['title']}")
-            print(f"🆔 ID: {selected['id']}")
+            print(f"📁 카테고리: {selected['category']}")
+            print(f"👁️ 조회수: {selected['views']}")
             print("-" * 40)
-            print(f"📄 내용:\n{selected['content']}")
+            print(f"📝 내용:\n{selected['content']}")
             print("=" * 40)
         
-        break  # 검색 종료
+        break
 
 #카테고리 보기
 def view_by_category():
