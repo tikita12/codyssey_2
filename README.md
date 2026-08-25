@@ -98,6 +98,7 @@
 
 ## 🗂 데이터 구조
 > 최상위 구조 ({ "prompts": [...] }): 전체 데이터를 prompts라는 키를 가진 하나의 큰 딕셔너리로 감쌌습니다.
+> 
 > id, title, content, created_date, category, favorite, view 항목을 가지고 있습니다
 
 ## 🧩 코드 구조 (함수 설명)
