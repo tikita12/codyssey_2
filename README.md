@@ -7,8 +7,18 @@
 ## 🛠 개발 환경
 - **Python 버전**: > 3.14.7
 - **에디터**: > VSCode 사용, 설치한 확장(Python Extension, Korean Language Pack)
-- **Git 버전**: > 여기에: 2.55.0.windows.5
+- **Git 버전**: > 2.55.0.windows.5
 - **운영체제**: > Windows
+- 🛠️ 개발 환경 설치 확인 명령어
+프로그램	확인 명령어	정상 출력 예시	비고
+Python	python --version	Python 3.10.x	안 될 경우 python3 --version 시도
+Git	git --version	git version 2.x.x	설치 후 터미널 재시작 필요
+
+## VSCode에서 Python파일 생성방법
+ - 1. 프로젝트 폴더 생성
+   2. VSCode에서 폴더 열기 : File-Open Folder-생선한 폴더 선택
+   3. 탐색기 창 상단 새 파일 아이콘 클릭->파일이름 main.py->엔터
+   4. 탐색기 창 상단 새 파일 아이콘 클릭->파일이름 prompt.json->엔터->[]입력 후 저장
 
 ## ▶️ 실행 방법
 > 1. git clone 명령어로 코드 복사 (https://github.com/tikita12/codyssey_2.git)
