@@ -179,4 +179,4 @@
 - `git log --oneline --graph` 결과 화면
 
 ## 🔗 제출 정보
-- **GitHub 저장소 URL**: > 여기에: 본인 저장소 주소를 적으세요
+- **GitHub 저장소 URL**: https://github.com/tikita12/codyssey_2
