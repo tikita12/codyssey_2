@@ -371,6 +371,30 @@ def view_top_prompts():
         print(f"{medal} {prompt['title']} (👁️ {prompt['views']}회)")
     print("="*40)
 
+def generate_unique_title(title, prompts):
+    """중복 제목 감지 시 자동으로 번호 부여"""
+    existing_titles = [p["title"] for p in prompts]
+    
+    if title not in existing_titles:
+        return title  # 중복 없으면 원래 제목 반환
+    
+    # 중복 있으면 번호 부여
+    counter = 2
+    while f"{title} ({counter})" in existing_titles:
+        counter += 1
+    
+    return f"{title} ({counter})"
+
+# 프롬프트 생성 시
+unique_title = generate_unique_title(new_title, prompts)
+new_prompt = {
+    "id": len(prompts) + 1,
+    "title": unique_title,
+    "content": new_content
+}
+prompts.append(new_prompt)
+print(f"✅ 프롬프트가 생성되었습니다: {unique_title}")
+
 # 프롬프트 관리 프로그램
 prompts  = load_prompts()
 
