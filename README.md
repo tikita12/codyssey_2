@@ -232,7 +232,7 @@ git clone https://github.com/tikita12/codyssey_2.git
 
 **실행 결과:**
 
-![git clone 실행 결과](./images/git_clone_result.png)
+![git clone 실행 결과](./image/git_clone_result.png)
 
 ### 2. 프로젝트 폴더 확인
 
@@ -243,7 +243,7 @@ ls
 
 **폴더 구조:**
 
-![프로젝트 폴더](./images/project_folder.png)
+![프로젝트 폴더](./image/project_folder.png)
 
 ### 3. 실행
 
