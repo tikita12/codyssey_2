@@ -54,7 +54,14 @@ def add_prompt():
             print("❌ 1~6 사이의 숫자를 입력하세요!")
     
     # ✅ 즐겨찾기 부분 삭제됨!
+    # ⭐ 중복 제목 자동 처리 추가!
+    title = generate_unique_title(title, prompts)
     
+    new_prompt = {
+        "id": len(prompts) + 1,
+        "title": title,          # ← 자동으로 (2), (3) 붙음
+        "content": content,
+    }    
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     new_prompt = {
@@ -385,15 +392,7 @@ def generate_unique_title(title, prompts):
     
     return f"{title} ({counter})"
 
-# 프롬프트 생성 시
-unique_title = generate_unique_title(new_title, prompts)
-new_prompt = {
-    "id": len(prompts) + 1,
-    "title": unique_title,
-    "content": new_content
-}
-prompts.append(new_prompt)
-print(f"✅ 프롬프트가 생성되었습니다: {unique_title}")
+
 
 # 프롬프트 관리 프로그램
 prompts  = load_prompts()
