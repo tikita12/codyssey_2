@@ -426,8 +426,18 @@ def main():
             add_prompt()
         elif choice == '2':
             view_prompts()
-        elif choice == '3':
-            delete_prompt()
+        elif choice == "3":
+            # 삭제할 프롬프트 ID 입력받기
+            show_list()
+            
+            if not prompts:
+                continue
+            
+            try:
+                prompt_id = int(input("\n삭제할 프롬프트 ID: ").strip())
+                delete_prompt(prompt_id)
+            except ValueError:
+                print("❌ 숫자만 입력해주세요!")
         elif choice == '4':
             update_prompt()
         elif choice == '5':
